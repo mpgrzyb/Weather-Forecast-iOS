@@ -19,6 +19,10 @@
 		83DC470D187311D200DEB6C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DC46F5187311D200DEB6C2 /* UIKit.framework */; };
 		83DC4715187311D200DEB6C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83DC4713187311D200DEB6C2 /* InfoPlist.strings */; };
 		83DC4717187311D200DEB6C2 /* Weather_ForecastTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DC4716187311D200DEB6C2 /* Weather_ForecastTests.m */; };
+		83DC47211873127900DEB6C2 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DC47201873127900DEB6C2 /* Storyboard.storyboard */; };
+		83DC472418731F1700DEB6C2 /* AddCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DC472318731F1700DEB6C2 /* AddCityViewController.m */; };
+		83DC47271873527400DEB6C2 /* CitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DC47261873527400DEB6C2 /* CitiesViewController.m */; };
+		83DC476F1873619400DEB6C2 /* CityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DC476E1873619400DEB6C2 /* CityCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,13 @@
 		83DC4712187311D200DEB6C2 /* Weather ForecastTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Weather ForecastTests-Info.plist"; sourceTree = "<group>"; };
 		83DC4714187311D200DEB6C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83DC4716187311D200DEB6C2 /* Weather_ForecastTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weather_ForecastTests.m; sourceTree = "<group>"; };
+		83DC47201873127900DEB6C2 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		83DC472218731F1700DEB6C2 /* AddCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCityViewController.h; sourceTree = "<group>"; };
+		83DC472318731F1700DEB6C2 /* AddCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCityViewController.m; sourceTree = "<group>"; };
+		83DC47251873527400DEB6C2 /* CitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitiesViewController.h; sourceTree = "<group>"; };
+		83DC47261873527400DEB6C2 /* CitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesViewController.m; sourceTree = "<group>"; };
+		83DC476D1873619400DEB6C2 /* CityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityCell.h; sourceTree = "<group>"; };
+		83DC476E1873619400DEB6C2 /* CityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,10 +118,16 @@
 		83DC46F7187311D200DEB6C2 /* Weather Forecast */ = {
 			isa = PBXGroup;
 			children = (
+				83DC476C187360E900DEB6C2 /* Klasy */,
 				83DC4700187311D200DEB6C2 /* AppDelegate.h */,
 				83DC4701187311D200DEB6C2 /* AppDelegate.m */,
 				83DC4703187311D200DEB6C2 /* Images.xcassets */,
 				83DC46F8187311D200DEB6C2 /* Supporting Files */,
+				83DC47201873127900DEB6C2 /* Storyboard.storyboard */,
+				83DC472218731F1700DEB6C2 /* AddCityViewController.h */,
+				83DC472318731F1700DEB6C2 /* AddCityViewController.m */,
+				83DC47251873527400DEB6C2 /* CitiesViewController.h */,
+				83DC47261873527400DEB6C2 /* CitiesViewController.m */,
 			);
 			path = "Weather Forecast";
 			sourceTree = "<group>";
@@ -142,6 +159,15 @@
 				83DC4713187311D200DEB6C2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		83DC476C187360E900DEB6C2 /* Klasy */ = {
+			isa = PBXGroup;
+			children = (
+				83DC476D1873619400DEB6C2 /* CityCell.h */,
+				83DC476E1873619400DEB6C2 /* CityCell.m */,
+			);
+			name = Klasy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +247,7 @@
 			files = (
 				83DC46FC187311D200DEB6C2 /* InfoPlist.strings in Resources */,
 				83DC4704187311D200DEB6C2 /* Images.xcassets in Resources */,
+				83DC47211873127900DEB6C2 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +266,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83DC472418731F1700DEB6C2 /* AddCityViewController.m in Sources */,
+				83DC476F1873619400DEB6C2 /* CityCell.m in Sources */,
+				83DC47271873527400DEB6C2 /* CitiesViewController.m in Sources */,
 				83DC4702187311D200DEB6C2 /* AppDelegate.m in Sources */,
 				83DC46FE187311D200DEB6C2 /* main.m in Sources */,
 			);
@@ -441,6 +471,7 @@
 				83DC471C187311D200DEB6C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		83DC471D187311D200DEB6C2 /* Build configuration list for PBXNativeTarget "Weather ForecastTests" */ = {
 			isa = XCConfigurationList;
@@ -449,6 +480,7 @@
 				83DC471F187311D200DEB6C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
