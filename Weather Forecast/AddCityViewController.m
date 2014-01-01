@@ -7,32 +7,44 @@
 //
 
 #import "AddCityViewController.h"
+#import "City.h"
 
 @interface AddCityViewController ()
 @property (nonatomic, strong) NSURLConnection *conn;
+-(void) addCity:(NSDictionary*)cityData;
+
+@property(nonatomic, strong) NSUserDefaults *userDefaults;
+@property (strong, nonatomic) IBOutlet UIView *waitView;
 @end
 
 @implementation AddCityViewController
+
+-(void) viewWillAppear:(BOOL)animated{
+    [[self.navigationController navigationBar]setTintColor:[UIColor whiteColor]];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.userDefaults = [[NSUserDefaults alloc] init];
+   
+    [self.searchBar setPlaceholder:@"Find your city"];
+    [self.searchBar becomeFirstResponder];
+}
 
 #pragma mark - SearchBar Actions
 
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self.searchBar resignFirstResponder];
-    [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];
-    [self.message setHidden:NO];
     [self downloadCities:self.searchBar.text];
+    [self.waitView setHidden:NO];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.citiesList = [[NSArray alloc] init];
     self.responseData = [[NSMutableData alloc] init];
-    self.citiesList = [[NSMutableArray alloc] init];
-    
-    [self.activityIndicator setHidden:YES];
-    [self.activityIndicator stopAnimating];
     [self.tableView setHidden:YES];
-    [self.message setHidden:YES];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,16 +54,6 @@
         // Custom initialization
     }
     return self;
-}
-
--(void) viewWillAppear:(BOOL)animated{
-    [[self.navigationController navigationBar]setTintColor:[UIColor whiteColor]];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self.activityIndicator setHidden:YES];
 }
 
 #pragma mark - Cities TableView
@@ -75,11 +77,18 @@
     return cell;
 }
 
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *selectedCity = [self.citiesList objectAtIndex:indexPath.row];
+    [self addCity:selectedCity];
+}
+
 #pragma mark - Download Cities
 
 -(void) downloadCities:(NSString*)city{
+    NSString *units = [[NSString alloc] init];
+    units = [self.userDefaults objectForKey:@"units"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?q=%@&type=like&mode=json", [city stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]]];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?q=%@&type=like&mode=json&units=%@", [city stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]], [units stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]]];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Current-Type"];
     self.conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
@@ -100,6 +109,19 @@
     if ([self.citiesList count] > 0) {
         [self.tableView setHidden:NO];
         [self.tableView reloadData];
+        [self.waitView setHidden:YES];
     }
 }
+
+#pragma mark - Other methods
+
+-(void) addCity:(NSDictionary*)cityData{
+
+    NSMutableArray *tmpCitiesList = [[NSMutableArray alloc] init];
+    [tmpCitiesList addObjectsFromArray:[self.userDefaults objectForKey:@"cities"]];
+    
+    [tmpCitiesList addObject:cityData];
+    [self.userDefaults setObject:tmpCitiesList forKey:@"cities"];
+}
+
 @end

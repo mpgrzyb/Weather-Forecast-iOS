@@ -8,29 +8,51 @@
 
 #import "CitiesViewController.h"
 #import "CityCell.h"
+#import "City.h"
 
 @interface CitiesViewController ()
--(IBAction)test:(id)sender;
+-(IBAction)edit:(id)sender;
+
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (strong, nonatomic) IBOutlet UITableView *citiesTableView;
+
+@property (nonatomic, strong) NSMutableArray *cities;
+@property (nonatomic, strong) NSString *units;
 @end
 
 @implementation CitiesViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationItem setHidesBackButton:YES];
+}
+
+- (void)viewDidLoad
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    [super viewDidLoad];
+   self.cities = [[NSMutableArray alloc] init];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.units = [[NSString alloc]init];
+    self.units = [userDefaults objectForKey:@"units"];
+    if ([self.units length] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Choose units" message:@"Please choose your units type" delegate:self cancelButtonTitle:Nil otherButtonTitles:@"Metric", @"Imperial", nil];
+        [alert show];
     }
-    return self;
+    
+    
+//    [userDefaults setObject:self.cities forKey:@"cities"];
+	
+    self.cities = [userDefaults objectForKey:@"cities"];
+    if ([self.cities count] == 0) {
+        [self.citiesTableView setHidden:YES];
+    }
 }
 
 #pragma mark - Cities TableView
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    int number = [self.citiesList count];
-    return 7;
+    int number = [self.cities count];
+    return number;
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -41,11 +63,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *identifier = @"Cell";
     CityCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-
-//    NSDictionary *tmpDictionary = [self.citiesList objectAtIndex:indexPath.row];
-//    cell.detailTextLabel.text = [[tmpDictionary objectForKey:@"sys"] objectForKey:@"country"];
-    cell.degreesLabel.text = [NSString stringWithFormat:@"65%@", @"\u00B0"];
-    cell.cityLabel.text = @"Paris";
+    
+    City *city = [[City alloc] initWithData:[self.cities objectAtIndex:indexPath.row]];
+    cell.degreesLabel.text = [NSString stringWithFormat:@"%.f%@", city.temp, @"\u00B0"];
+    cell.cityLabel.text = city.cityName;
     return cell;
 }
 
@@ -56,12 +77,15 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"BLS");
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        if (editingStyle == UITableViewCellEditingStyleDelete)
+        {
+            [self.cities removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:self.cities forKey:@"cities"];
+        }
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
 
@@ -72,31 +96,29 @@
     
 }
 
+#pragma mark - Edit button click event
 
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationItem setHidesBackButton:YES];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(IBAction)test:(id)sender{
+-(IBAction)edit:(id)sender{
     if ([self.editButton.title isEqualToString:@"Edit"]) {
         [self.editButton setTitle:@"Done"];
         [self.citiesTableView setEditing:YES];
     }else{
         [self.editButton setTitle:@"Edit"];
         [self.citiesTableView setEditing:NO];
+    }
+}
+
+#pragma mark - Alert buttons click event
+
+-(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    switch (buttonIndex) {
+        case 0:
+            [userDefaults setObject:@"metric" forKey:@"units"];
+            break;
+        case 1:
+            [userDefaults setObject:@"imperial" forKey:@"units"];
+            break;
     }
 }
 

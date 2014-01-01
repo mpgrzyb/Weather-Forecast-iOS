@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "clouds-50.png"
+      "filename" : "partly_cloudy.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "partly_cloudy_day-100.png"
     }
   ],
   "info" : {
