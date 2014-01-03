@@ -33,9 +33,20 @@
         self.timeNow = [NSDate dateWithTimeIntervalSince1970:[[data objectForKey:@"dt"] doubleValue]];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"HH"];
-        NSString *hourTmp = [[NSString alloc] initWithString:[dateFormatter stringFromDate:self.timeNow]];
-        int hour = [hourTmp integerValue];
-        if(hour < 6 && hour >= 21){
+        
+//        NSString *hourTmp = [[NSString alloc] initWithString:[dateFormatter stringFromDate:self.timeNow]];
+//        int hour = [hourTmp integerValue];
+        
+//        if(hour < 6 || hour >= 20){
+//            self.isDay = NO;
+//        }else{
+//            self.isDay = YES;
+//        }
+        
+        self.sunSet = [NSDate dateWithTimeIntervalSince1970:[[[data objectForKey:@"sys"] objectForKey:@"sunset"] doubleValue]];
+        self.sunRise = [NSDate dateWithTimeIntervalSince1970:[[[data objectForKey:@"sys"] objectForKey:@"sunrise"] doubleValue]];
+        
+        if(self.sunSet < self.timeNow || self.sunRise > self.timeNow){
             self.isDay = NO;
         }else{
             self.isDay = YES;

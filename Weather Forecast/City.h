@@ -18,6 +18,8 @@
 @property (nonatomic) int cityId;
 @property (nonatomic, strong) NSString *timeOfLastRefresh;
 @property (nonatomic, strong) NSDate *timeNow;
+@property (nonatomic, strong) NSDate *sunSet;
+@property (nonatomic, strong) NSDate *sunRise;
 @property (nonatomic) BOOL isDay;
 
 #pragma mark - weather variables

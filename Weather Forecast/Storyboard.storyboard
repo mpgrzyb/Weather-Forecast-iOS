@@ -35,51 +35,44 @@
                                 <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="70" id="6Fd-JI-uF7" customClass="CityCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="70" id="6Fd-JI-uF7" customClass="CityCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Fd-JI-uF7" id="19g-aU-iiD">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-QW-8lz" userLabel="City">
-                                                    <rect key="frame" x="20" y="10" width="147" height="50"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-QW-8lz" userLabel="City">
+                                                    <rect key="frame" x="20" y="10" width="150" height="49"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="jfV-Yt-UPp"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4422" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPO-UZ-LZy" userLabel="Degrees">
-                                                    <rect key="frame" x="233" y="13" width="67" height="43"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4422" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPO-UZ-LZy" userLabel="Degrees">
+                                                    <rect key="frame" x="220" y="13" width="67" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="43" id="ZAx-Yd-vSx"/>
-                                                        <constraint firstAttribute="width" constant="67" id="ys3-L4-bYi"/>
+                                                        <constraint firstAttribute="height" constant="43" id="0Tz-Qg-PIu"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="D4H-DZ-DVj">
-                                                    <rect key="frame" x="175" y="14" width="42" height="42"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="D4H-DZ-DVj">
+                                                    <rect key="frame" x="171" y="14" width="41" height="41"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="42" id="Eex-P0-IW3"/>
-                                                        <constraint firstAttribute="width" constant="42" id="MZ8-U7-bav"/>
+                                                        <constraint firstAttribute="width" constant="41" id="33H-3J-hFl"/>
+                                                        <constraint firstAttribute="height" constant="41" id="wfF-DI-tFO"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="D4H-DZ-DVj" secondAttribute="centerY" id="DRV-P4-W90"/>
-                                                <constraint firstItem="gg0-QW-8lz" firstAttribute="leading" secondItem="19g-aU-iiD" secondAttribute="leading" constant="20" id="RFs-kT-c7a"/>
-                                                <constraint firstItem="D4H-DZ-DVj" firstAttribute="leading" secondItem="gg0-QW-8lz" secondAttribute="trailing" constant="8" id="VMO-jN-ZhI"/>
-                                                <constraint firstItem="gg0-QW-8lz" firstAttribute="centerY" secondItem="D4H-DZ-DVj" secondAttribute="centerY" id="ahP-b2-iQ6"/>
-                                                <constraint firstItem="GPO-UZ-LZy" firstAttribute="leading" secondItem="D4H-DZ-DVj" secondAttribute="trailing" constant="16" id="esz-jg-Krb"/>
-                                                <constraint firstAttribute="trailing" secondItem="GPO-UZ-LZy" secondAttribute="trailing" constant="20" id="kJV-Fq-y1K"/>
-                                                <constraint firstAttribute="centerY" secondItem="GPO-UZ-LZy" secondAttribute="centerY" id="py2-Gj-7RZ"/>
+                                                <constraint firstItem="GPO-UZ-LZy" firstAttribute="leading" secondItem="D4H-DZ-DVj" secondAttribute="trailing" constant="8" id="g3B-WL-W7K"/>
+                                                <constraint firstAttribute="centerY" secondItem="D4H-DZ-DVj" secondAttribute="centerY" id="vFW-QS-loz"/>
+                                                <constraint firstAttribute="centerY" secondItem="GPO-UZ-LZy" secondAttribute="centerY" id="veS-nZ-TAY"/>
+                                                <constraint firstAttribute="trailing" secondItem="GPO-UZ-LZy" secondAttribute="trailing" id="zcK-j2-JdR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,6 +80,7 @@
                                             <outlet property="cityLabel" destination="gg0-QW-8lz" id="AB2-8N-Yhr"/>
                                             <outlet property="degreesLabel" destination="GPO-UZ-LZy" id="4Uo-Wq-kRL"/>
                                             <outlet property="weatherIcon" destination="D4H-DZ-DVj" id="YHU-Fu-sWb"/>
+                                            <segue destination="qwO-NE-1rt" kind="push" identifier="WeatherDetails" id="7Lk-XC-zxy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -128,6 +122,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H3C-2k-KRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="713" y="-6"/>
+        </scene>
+        <!--Weather Details View Controller-->
+        <scene sceneID="WrR-sy-18O">
+            <objects>
+                <viewController id="qwO-NE-1rt" customClass="WeatherDetailsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Rq-94-VgC"/>
+                        <viewControllerLayoutGuide type="bottom" id="QWW-tl-xfV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YSU-2E-d2Q">
+                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oH3-xJ-bcp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DxL-WI-hrp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1376" y="-6"/>
         </scene>
         <!--Add City View Controller-->
         <scene sceneID="o3f-l9-7WK">
@@ -225,7 +238,9 @@
                             <constraint firstItem="hMF-da-nzz" firstAttribute="top" secondItem="9Us-hi-h90" secondAttribute="bottom" id="yP4-OH-TJW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9f9-r4-2iJ"/>
+                    <navigationItem key="navigationItem" id="9f9-r4-2iJ">
+                        <barButtonItem key="rightBarButtonItem" title="Use geo data" id="Vjk-y6-gzE"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="0sS-94-1rq" id="5h6-vp-fzs"/>
                         <outlet property="message" destination="4ka-ix-Q0c" id="pWn-Gq-FVr"/>

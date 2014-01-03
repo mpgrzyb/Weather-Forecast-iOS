@@ -122,11 +122,27 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     NSDate *dateNow = [[NSDate alloc] init];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 	[dict setObject:[dateFormatter stringFromDate:dateNow] forKey:@"refreshDateTime"];
-    [dict setObject:cityData forKey:@"cityData"];
+    int cityId = [[cityData objectForKey:@"id"] integerValue];
+    [dict setObject:[self downloadCityData:cityId] forKey:@"cityData"];
     [tmpCitiesList addObject:dict];
     [self.userDefaults setObject:tmpCitiesList forKey:@"cities"];
+}
+
+#pragma mark - Download Citie data
+
+-(NSDictionary*) downloadCityData:(int)cityId{
+    NSString *units = [[NSString alloc] init];
+    units = [self.userDefaults objectForKey:@"units"];
+    NSURL *targetURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?id=%d&units=%@", cityId, [units stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *dictionary = [[NSDictionary alloc] init];
+    dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    return dictionary;
 }
 
 @end

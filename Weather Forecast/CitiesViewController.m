@@ -10,6 +10,7 @@
 #import "CityCell.h"
 #import "City.h"
 #import "IconPicker.h"
+#import "WeatherDetailsViewController.h"
 
 @interface CitiesViewController ()
 -(IBAction)edit:(id)sender;
@@ -76,8 +77,8 @@
     
     City *city = [[City alloc] initWithData:[self.cities objectAtIndex:indexPath.row]];
     if(city.isWeatherActual == NO){
-        UIAlertView *messageAlert = [[UIAlertView alloc] initWithTitle:@"Test" message:@"Nieaktualne dane" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [messageAlert show];
+//        UIAlertView *messageAlert = [[UIAlertView alloc] initWithTitle:@"Test" message:@"Nieaktualne dane" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [messageAlert show];
         city = [[City alloc] initWithData:[self downloadCityData:city.cityId rowToUpdate:indexPath.row]];
     }
     
@@ -162,5 +163,16 @@
     return dict;
 }
 
+#pragma mark - Segue Weather details
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"WeatherDetails"]){
+        WeatherDetailsViewController *weatherDetailsViewController = [segue destinationViewController];
+        NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
+        City *city = [[City alloc] initWithData:[self.cities objectAtIndex:indexPath.row]];
+        [weatherDetailsViewController setTitle:city.cityName];
+        [weatherDetailsViewController setCityId:city.cityId];
+    }
+}
 
 @end
