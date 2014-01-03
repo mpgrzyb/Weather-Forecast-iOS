@@ -16,20 +16,24 @@
 @property (nonatomic) float longitude;
 @property (nonatomic) float latitude;
 @property (nonatomic) int cityId;
-@property (nonatomic, strong) NSDate *lastRefresh;
+@property (nonatomic, strong) NSString *timeOfLastRefresh;
+@property (nonatomic, strong) NSDate *timeNow;
+@property (nonatomic) BOOL isDay;
 
 #pragma mark - weather variables
-@property (nonatomic) float temp;
-@property (nonatomic) float tempMin;
-@property (nonatomic) float tempMax;
-@property (nonatomic) float pressure;
-@property (nonatomic) float humidity;
-@property (nonatomic) float windSpeed;
-@property (nonatomic) float clouds;
-@property (nonatomic) NSString *weatherMain;
-@property (nonatomic) NSString *weatherDescription;
+@property (nonatomic) float temp; // in degrees
+@property (nonatomic) float tempMin; // in degrees
+@property (nonatomic) float tempMax; // in degrees
+@property (nonatomic) float pressure; // in hPa
+@property (nonatomic) float humidity; // in %
+@property (nonatomic) float windSpeed; // in mps
+@property (nonatomic) float clouds; // Cloudiness in %
+@property (nonatomic) int weatherId; // weather id
+@property (nonatomic, strong) NSString *weatherMain; // main description
+@property (nonatomic, strong) NSString *weatherDescription; // longer description
 
 #pragma mark - methods
--(id) initWithData:(NSDictionary*) data;
+-(id) initWithData:(NSDictionary*) firstData;
 -(id) initWithId:(int) cityId;
+-(BOOL) isWeatherActual;
 @end

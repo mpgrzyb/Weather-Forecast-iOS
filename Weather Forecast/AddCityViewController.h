@@ -17,5 +17,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *cellDetail;
 
 @property (nonatomic, retain) NSMutableData* responseData;
-@property (strong, nonatomic) NSArray *citiesList;
+@property (strong, nonatomic) NSMutableArray *citiesList;
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		83B0E2D118743CE9007EE5FB /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B0E2D018743CE9007EE5FB /* City.m */; };
+		83B0E2D41874D165007EE5FB /* IconPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B0E2D31874D165007EE5FB /* IconPicker.m */; };
 		83DC46F2187311D200DEB6C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DC46F1187311D200DEB6C2 /* Foundation.framework */; };
 		83DC46F4187311D200DEB6C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DC46F3187311D200DEB6C2 /* CoreGraphics.framework */; };
 		83DC46F6187311D200DEB6C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DC46F5187311D200DEB6C2 /* UIKit.framework */; };
@@ -39,6 +40,8 @@
 /* Begin PBXFileReference section */
 		83B0E2CF18743CE9007EE5FB /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		83B0E2D018743CE9007EE5FB /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
+		83B0E2D21874D165007EE5FB /* IconPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconPicker.h; sourceTree = "<group>"; };
+		83B0E2D31874D165007EE5FB /* IconPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconPicker.m; sourceTree = "<group>"; };
 		83DC46EE187311D200DEB6C2 /* Weather Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Forecast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DC46F1187311D200DEB6C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83DC46F3187311D200DEB6C2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -171,6 +174,8 @@
 				83DC476E1873619400DEB6C2 /* CityCell.m */,
 				83B0E2CF18743CE9007EE5FB /* City.h */,
 				83B0E2D018743CE9007EE5FB /* City.m */,
+				83B0E2D21874D165007EE5FB /* IconPicker.h */,
+				83B0E2D31874D165007EE5FB /* IconPicker.m */,
 			);
 			name = Klasy;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 				83DC476F1873619400DEB6C2 /* CityCell.m in Sources */,
 				83B0E2D118743CE9007EE5FB /* City.m in Sources */,
 				83DC47271873527400DEB6C2 /* CitiesViewController.m in Sources */,
+				83B0E2D41874D165007EE5FB /* IconPicker.m in Sources */,
 				83DC4702187311D200DEB6C2 /* AppDelegate.m in Sources */,
 				83DC46FE187311D200DEB6C2 /* main.m in Sources */,
 			);

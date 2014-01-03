@@ -63,7 +63,7 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="D4H-DZ-DVj">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="D4H-DZ-DVj">
                                                     <rect key="frame" x="175" y="14" width="42" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
@@ -86,6 +86,7 @@
                                         <connections>
                                             <outlet property="cityLabel" destination="gg0-QW-8lz" id="AB2-8N-Yhr"/>
                                             <outlet property="degreesLabel" destination="GPO-UZ-LZy" id="4Uo-Wq-kRL"/>
+                                            <outlet property="weatherIcon" destination="D4H-DZ-DVj" id="YHU-Fu-sWb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -263,7 +264,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clouds" width="50" height="50"/>
+        <image name="sun" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -271,6 +272,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="KWF-Nw-F5K"/>
+        <segue reference="oZU-8w-Tt7"/>
     </inferredMetricsTieBreakers>
 </document>

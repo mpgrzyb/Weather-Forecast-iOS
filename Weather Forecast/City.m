@@ -10,10 +10,12 @@
 
 @implementation City
 
--(id) initWithData:(NSDictionary*) data{
+-(id) initWithData:(NSDictionary*) firstData{
     self = [super init];
     
     if(self){
+        NSDictionary *data = [NSDictionary dictionaryWithDictionary:[firstData objectForKey:@"cityData"]];
+        
         self.cityName = [data objectForKey:@"name"];
         self.country = [[data objectForKey:@"sys"] objectForKey:@"country"];
         self.latitude = [[[data objectForKey:@"coord"] objectForKey:@"lon"] floatValue];
@@ -28,20 +30,51 @@
         self.windSpeed = [[[data objectForKey:@"wind"] objectForKey:@"speed"] floatValue];
         self.clouds = [[[data objectForKey:@"clouds"] objectForKey:@"all"] floatValue];
         
+        self.timeNow = [NSDate dateWithTimeIntervalSince1970:[[data objectForKey:@"dt"] doubleValue]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"HH"];
+        NSString *hourTmp = [[NSString alloc] initWithString:[dateFormatter stringFromDate:self.timeNow]];
+        int hour = [hourTmp integerValue];
+        if(hour < 6 && hour >= 21){
+            self.isDay = NO;
+        }else{
+            self.isDay = YES;
+        }
+        
+        self.timeOfLastRefresh = [firstData objectForKey:@"refreshDateTime"];
+        
         NSArray *tmpArray = [[NSArray alloc]init];
         NSDictionary *tmpDictionary = [[NSDictionary alloc] init];
         tmpArray = [data objectForKey:@"weather"];
         tmpDictionary = [tmpArray objectAtIndex:0];
+        self.weatherId = [[tmpDictionary objectForKey:@"id"] integerValue];
         self.weatherMain = [tmpDictionary objectForKey:@"main"];
         self.weatherDescription = [tmpDictionary objectForKey:@"description"];
     }
     return self;
 }
+
 -(id) initWithId:(int)cityId{
     self = [super init];
     if(self){
         self.cityId = cityId;
     }
     return self;
+}
+
+-(BOOL)isWeatherActual{
+    NSDate *dateNow = [[NSDate alloc] init];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date = [[NSDate alloc] init];
+    date = [dateFormatter dateFromString:self.timeOfLastRefresh];
+    
+    NSTimeInterval secondsBetween = [dateNow timeIntervalSinceDate:date];
+    int numberOfMinutes = secondsBetween / 60;
+    if (numberOfMinutes >= 30) {
+        return NO;
+    }
+    return YES;
 }
 @end

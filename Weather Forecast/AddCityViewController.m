@@ -42,7 +42,7 @@
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    self.citiesList = [[NSArray alloc] init];
+    self.citiesList = [[NSMutableArray alloc] init];
     self.responseData = [[NSMutableData alloc] init];
     [self.tableView setHidden:YES];
 }
@@ -78,7 +78,7 @@
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *selectedCity = [self.citiesList objectAtIndex:indexPath.row];
+    NSMutableDictionary *selectedCity = [self.citiesList objectAtIndex:indexPath.row];
     [self addCity:selectedCity];
 }
 
@@ -89,7 +89,7 @@
     units = [self.userDefaults objectForKey:@"units"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?q=%@&type=like&mode=json&units=%@", [city stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]], [units stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]]];
-    [request setHTTPMethod:@"POST"];
+    [request setHTTPMethod:@"GET"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Current-Type"];
     self.conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
 }
@@ -115,12 +115,17 @@
 
 #pragma mark - Other methods
 
--(void) addCity:(NSDictionary*)cityData{
-
+-(void) addCity:(NSMutableDictionary*)cityData{
     NSMutableArray *tmpCitiesList = [[NSMutableArray alloc] init];
     [tmpCitiesList addObjectsFromArray:[self.userDefaults objectForKey:@"cities"]];
     
-    [tmpCitiesList addObject:cityData];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    NSDate *dateNow = [[NSDate alloc] init];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[dict setObject:[dateFormatter stringFromDate:dateNow] forKey:@"refreshDateTime"];
+    [dict setObject:cityData forKey:@"cityData"];
+    [tmpCitiesList addObject:dict];
     [self.userDefaults setObject:tmpCitiesList forKey:@"cities"];
 }
 
