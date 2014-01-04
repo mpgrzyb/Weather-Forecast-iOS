@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface AddCityViewController : UIViewController
+@property (retain, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *message;
@@ -18,4 +20,6 @@
 
 @property (nonatomic, retain) NSMutableData* responseData;
 @property (strong, nonatomic) NSMutableArray *citiesList;
+
+-(IBAction)useGeolocationData:(id)sender;
 @end

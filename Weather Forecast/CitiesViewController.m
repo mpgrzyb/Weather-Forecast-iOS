@@ -77,9 +77,9 @@
     
     City *city = [[City alloc] initWithData:[self.cities objectAtIndex:indexPath.row]];
     if(city.isWeatherActual == NO){
-//        UIAlertView *messageAlert = [[UIAlertView alloc] initWithTitle:@"Test" message:@"Nieaktualne dane" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//        [messageAlert show];
-        city = [[City alloc] initWithData:[self downloadCityData:city.cityId rowToUpdate:indexPath.row]];
+        city = [[City alloc] initWithId:city.cityId andUnits:self.units];
+        [self.cities replaceObjectAtIndex:indexPath.row withObject:city.dictionary];
+        [self.userDefaults setObject:self.cities forKey:@"cities"];
     }
     
     cell.degreesLabel.text = [NSString stringWithFormat:@"%.f%@", city.temp, @"\u00B0"];
@@ -139,30 +139,6 @@
     }
 }
 
-#pragma mark - Download Citie data
-
--(NSDictionary*) downloadCityData:(int)cityId rowToUpdate:(int)rowNum{
-    NSString *units = [[NSString alloc] init];
-    units = [self.userDefaults objectForKey:@"units"];
-    NSURL *targetURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?id=%d&units=%@", cityId, [units stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSDictionary *dictionary = [[NSDictionary alloc] init];
-    dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    NSDate *dateNow = [[NSDate alloc] init];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    [dict setObject:[dateFormatter stringFromDate:dateNow] forKey:@"refreshDateTime"];
-    [dict setObject:dictionary forKey:@"cityData"];
-
-    [self.cities replaceObjectAtIndex:rowNum withObject:dict];
-    [self.userDefaults setObject:self.cities forKey:@"cities"];
-    
-    return dict;
-}
-
 #pragma mark - Segue Weather details
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -170,8 +146,9 @@
         WeatherDetailsViewController *weatherDetailsViewController = [segue destinationViewController];
         NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
         City *city = [[City alloc] initWithData:[self.cities objectAtIndex:indexPath.row]];
-        [weatherDetailsViewController setTitle:city.cityName];
+        [weatherDetailsViewController setTitle:@"Details"];
         [weatherDetailsViewController setCityId:city.cityId];
+        [weatherDetailsViewController setCity:city];
     }
 }
 

@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSDate *sunSet;
 @property (nonatomic, strong) NSDate *sunRise;
 @property (nonatomic) BOOL isDay;
+@property (nonatomic, strong) NSDictionary *dictionary;
 
 #pragma mark - weather variables
 @property (nonatomic) float temp; // in degrees
@@ -29,13 +30,13 @@
 @property (nonatomic) float pressure; // in hPa
 @property (nonatomic) float humidity; // in %
 @property (nonatomic) float windSpeed; // in mps
-@property (nonatomic) float clouds; // Cloudiness in %
+@property (nonatomic) float cloudiness; // Cloudiness in %
 @property (nonatomic) int weatherId; // weather id
 @property (nonatomic, strong) NSString *weatherMain; // main description
 @property (nonatomic, strong) NSString *weatherDescription; // longer description
 
 #pragma mark - methods
 -(id) initWithData:(NSDictionary*) firstData;
--(id) initWithId:(int) cityId;
+-(id) initWithId:(int) cityId andUnits:(NSString*)units;
 -(BOOL) isWeatherActual;
 @end

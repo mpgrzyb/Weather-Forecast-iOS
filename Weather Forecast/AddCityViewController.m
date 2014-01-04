@@ -30,6 +30,12 @@
    
     [self.searchBar setPlaceholder:@"Find your city"];
     [self.searchBar becomeFirstResponder];
+    
+    
+//    Set up of location manager
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
 }
 
 #pragma mark - SearchBar Actions
@@ -94,6 +100,16 @@
     self.conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
 }
 
+-(void) downloadCitiesWithLongitude:(float)longitude andLatitude:(float)latitude{
+    NSString *units = [[NSString alloc] init];
+    units = [self.userDefaults objectForKey:@"units"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?lat=%f&lon=%f&units=%@", latitude, longitude, [units stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Current-Type"];
+    self.conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+}
+
 #pragma mark - Server Connection
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -110,6 +126,7 @@
         [self.tableView setHidden:NO];
         [self.tableView reloadData];
         [self.waitView setHidden:YES];
+        [self.activityIndicator stopAnimating];
     }
 }
 
@@ -119,30 +136,24 @@
     NSMutableArray *tmpCitiesList = [[NSMutableArray alloc] init];
     [tmpCitiesList addObjectsFromArray:[self.userDefaults objectForKey:@"cities"]];
     
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    NSDate *dateNow = [[NSDate alloc] init];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-	[dict setObject:[dateFormatter stringFromDate:dateNow] forKey:@"refreshDateTime"];
     int cityId = [[cityData objectForKey:@"id"] integerValue];
-    [dict setObject:[self downloadCityData:cityId] forKey:@"cityData"];
-    [tmpCitiesList addObject:dict];
+    City *city = [[City alloc] initWithId:cityId andUnits:[self.userDefaults objectForKey:@"units"]];
+    [tmpCitiesList addObject:[city dictionary]];
     [self.userDefaults setObject:tmpCitiesList forKey:@"cities"];
 }
 
-#pragma mark - Download Citie data
+#pragma mark - Use geolocation data
 
--(NSDictionary*) downloadCityData:(int)cityId{
-    NSString *units = [[NSString alloc] init];
-    units = [self.userDefaults objectForKey:@"units"];
-    NSURL *targetURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?id=%d&units=%@", cityId, [units stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSDictionary *dictionary = [[NSDictionary alloc] init];
-    dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+-(IBAction)useGeolocationData:(id)sender{
+    self.citiesList = [[NSMutableArray alloc] init];
+    self.responseData = [[NSMutableData alloc] init];
     
-    return dictionary;
+    [self.tableView setHidden:YES];
+    [self.locationManager startUpdatingLocation];
+    [self.searchBar resignFirstResponder];
+    [self.activityIndicator startAnimating];
+    [self.waitView setHidden:NO];
+    [self downloadCitiesWithLongitude:self.locationManager.location.coordinate.longitude andLatitude:self.locationManager.location.coordinate.latitude];
 }
 
 @end

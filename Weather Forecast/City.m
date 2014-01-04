@@ -7,6 +7,9 @@
 //
 
 #import "City.h"
+@interface City()
+-(void) setValues:(NSDictionary*)cityDictionary;
+@end
 
 @implementation City
 
@@ -14,61 +17,28 @@
     self = [super init];
     
     if(self){
-        NSDictionary *data = [NSDictionary dictionaryWithDictionary:[firstData objectForKey:@"cityData"]];
-        
-        self.cityName = [data objectForKey:@"name"];
-        self.country = [[data objectForKey:@"sys"] objectForKey:@"country"];
-        self.latitude = [[[data objectForKey:@"coord"] objectForKey:@"lon"] floatValue];
-        self.longitude = [[[data objectForKey:@"coord"] objectForKey:@"lat"] floatValue];
-        self.cityId = [[data objectForKey:@"id"] intValue];
-        
-        self.temp = [[[data objectForKey:@"main"] objectForKey:@"temp"] floatValue];
-        self.tempMin = [[[data objectForKey:@"main"] objectForKey:@"temp_min"] floatValue];
-        self.tempMax = [[[data objectForKey:@"main"] objectForKey:@"temp_max"] floatValue];
-        self.pressure = [[[data objectForKey:@"main"] objectForKey:@"pressure"]  floatValue];
-        self.humidity = [[[data objectForKey:@"main"] objectForKey:@"humidity"] floatValue];
-        self.windSpeed = [[[data objectForKey:@"wind"] objectForKey:@"speed"] floatValue];
-        self.clouds = [[[data objectForKey:@"clouds"] objectForKey:@"all"] floatValue];
-        
-        self.timeNow = [NSDate dateWithTimeIntervalSince1970:[[data objectForKey:@"dt"] doubleValue]];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"HH"];
-        
-//        NSString *hourTmp = [[NSString alloc] initWithString:[dateFormatter stringFromDate:self.timeNow]];
-//        int hour = [hourTmp integerValue];
-        
-//        if(hour < 6 || hour >= 20){
-//            self.isDay = NO;
-//        }else{
-//            self.isDay = YES;
-//        }
-        
-        self.sunSet = [NSDate dateWithTimeIntervalSince1970:[[[data objectForKey:@"sys"] objectForKey:@"sunset"] doubleValue]];
-        self.sunRise = [NSDate dateWithTimeIntervalSince1970:[[[data objectForKey:@"sys"] objectForKey:@"sunrise"] doubleValue]];
-        
-        if(self.sunSet < self.timeNow || self.sunRise > self.timeNow){
-            self.isDay = NO;
-        }else{
-            self.isDay = YES;
-        }
-        
-        self.timeOfLastRefresh = [firstData objectForKey:@"refreshDateTime"];
-        
-        NSArray *tmpArray = [[NSArray alloc]init];
-        NSDictionary *tmpDictionary = [[NSDictionary alloc] init];
-        tmpArray = [data objectForKey:@"weather"];
-        tmpDictionary = [tmpArray objectAtIndex:0];
-        self.weatherId = [[tmpDictionary objectForKey:@"id"] integerValue];
-        self.weatherMain = [tmpDictionary objectForKey:@"main"];
-        self.weatherDescription = [tmpDictionary objectForKey:@"description"];
+        [self setValues:firstData];
     }
     return self;
 }
 
--(id) initWithId:(int)cityId{
+-(id) initWithId:(int)cityId andUnits:(NSString*)units{
     self = [super init];
     if(self){
-        self.cityId = cityId;
+        NSURL *targetURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?id=%d&units=%@", cityId, [units stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSDictionary *dictionary = [[NSDictionary alloc] init];
+        dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        NSDate *dateNow = [[NSDate alloc] init];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [dict setObject:[dateFormatter stringFromDate:dateNow] forKey:@"refreshDateTime"];
+        [dict setObject:dictionary forKey:@"cityData"];
+        self.dictionary = dict;
+        [self setValues:dict];
     }
     return self;
 }
@@ -88,4 +58,56 @@
     }
     return YES;
 }
+
+#pragma mark - Setting values for all variables
+-(void) setValues:(NSDictionary*)cityDictionary{
+    NSDictionary *data = [NSDictionary dictionaryWithDictionary:[cityDictionary objectForKey:@"cityData"]];
+    
+    self.cityName = [data objectForKey:@"name"];
+    self.country = [[data objectForKey:@"sys"] objectForKey:@"country"];
+    self.latitude = [[[data objectForKey:@"coord"] objectForKey:@"lon"] floatValue];
+    self.longitude = [[[data objectForKey:@"coord"] objectForKey:@"lat"] floatValue];
+    self.cityId = [[data objectForKey:@"id"] intValue];
+    
+    self.temp = [[[data objectForKey:@"main"] objectForKey:@"temp"] floatValue];
+    self.tempMin = [[[data objectForKey:@"main"] objectForKey:@"temp_min"] floatValue];
+    self.tempMax = [[[data objectForKey:@"main"] objectForKey:@"temp_max"] floatValue];
+    self.pressure = [[[data objectForKey:@"main"] objectForKey:@"pressure"]  floatValue];
+    self.humidity = [[[data objectForKey:@"main"] objectForKey:@"humidity"] floatValue];
+    self.windSpeed = [[[data objectForKey:@"wind"] objectForKey:@"speed"] floatValue];
+    self.cloudiness = [[[data objectForKey:@"clouds"] objectForKey:@"all"] floatValue];
+    
+    self.timeNow = [NSDate dateWithTimeIntervalSince1970:[[data objectForKey:@"dt"] doubleValue]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH"];
+    
+    //        NSString *hourTmp = [[NSString alloc] initWithString:[dateFormatter stringFromDate:self.timeNow]];
+    //        int hour = [hourTmp integerValue];
+    
+    //        if(hour < 6 || hour >= 20){
+    //            self.isDay = NO;
+    //        }else{
+    //            self.isDay = YES;
+    //        }
+    
+    self.sunSet = [NSDate dateWithTimeIntervalSince1970:[[[data objectForKey:@"sys"] objectForKey:@"sunset"] doubleValue]];
+    self.sunRise = [NSDate dateWithTimeIntervalSince1970:[[[data objectForKey:@"sys"] objectForKey:@"sunrise"] doubleValue]];
+    
+    if(self.sunSet < self.timeNow || self.sunRise > self.timeNow){
+        self.isDay = NO;
+    }else{
+        self.isDay = YES;
+    }
+    
+    self.timeOfLastRefresh = [cityDictionary objectForKey:@"refreshDateTime"];
+    
+    NSArray *tmpArray = [[NSArray alloc]init];
+    NSDictionary *tmpDictionary = [[NSDictionary alloc] init];
+    tmpArray = [data objectForKey:@"weather"];
+    tmpDictionary = [tmpArray objectAtIndex:0];
+    self.weatherId = [[tmpDictionary objectForKey:@"id"] integerValue];
+    self.weatherMain = [tmpDictionary objectForKey:@"main"];
+    self.weatherDescription = [tmpDictionary objectForKey:@"description"];
+}
+
 @end
