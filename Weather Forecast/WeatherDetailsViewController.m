@@ -74,13 +74,4 @@
     
     return cell;
 }
--(IBAction)segmentSwitch:(id)sender{
-    UISegmentedControl *segmentControll = (UISegmentedControl*) sender;
-    int selectedIndex = [segmentControll selectedSegmentIndex];
-    if (selectedIndex == 0) {
-        [self.todayView setHidden:NO];
-    }else{
-        [self.todayView setHidden:YES];
-    }
-}
 @end

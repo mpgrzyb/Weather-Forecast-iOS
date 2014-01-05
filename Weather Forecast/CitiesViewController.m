@@ -10,7 +10,7 @@
 #import "CityCell.h"
 #import "City.h"
 #import "IconPicker.h"
-#import "WeatherDetailsViewController.h"
+#import "PageViewController.h"
 
 @interface CitiesViewController ()
 -(IBAction)edit:(id)sender;
@@ -143,12 +143,10 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([[segue identifier] isEqualToString:@"WeatherDetails"]){
-        WeatherDetailsViewController *weatherDetailsViewController = [segue destinationViewController];
         NSIndexPath *indexPath = [self.citiesTableView indexPathForSelectedRow];
         City *city = [[City alloc] initWithData:[self.cities objectAtIndex:indexPath.row]];
-        [weatherDetailsViewController setTitle:@"Details"];
-        [weatherDetailsViewController setCityId:city.cityId];
-        [weatherDetailsViewController setCity:city];
+        PageViewController *pageViewController = [segue destinationViewController];
+        [pageViewController setCity:city];
     }
 }
 

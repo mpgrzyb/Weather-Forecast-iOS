@@ -11,16 +11,12 @@
 
 @interface WeatherDetailsViewController : UIViewController
 
-@property (nonatomic) int cityId;
-
--(IBAction)segmentSwitch:(id)sender;
 @property (nonatomic, strong) City *city;
 
-
 @property (strong, nonatomic) IBOutlet UIView *todayView;
-@property (strong, nonatomic) IBOutlet UIView *nextDaysView;
 @property (strong, nonatomic) IBOutlet UILabel *cityNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *weatherDescriptionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *temperatureLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *icon;
+
 @end
