@@ -9,7 +9,7 @@
 #import "PageViewController.h"
 
 @interface PageViewController ()
-
+-(IBAction)refreshData:(id)sender;
 @end
 
 @implementation PageViewController
@@ -17,8 +17,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     UIStoryboard *storyBoard = [self storyboard];
     self.dataSource = self;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData:)];
+    
     self.weatherDetailViewController = [storyBoard instantiateViewControllerWithIdentifier:@"WeatherDetails"];
     [self.weatherDetailViewController setCity:self.city];
     self.weatherForecastViewController = [storyBoard instantiateViewControllerWithIdentifier:@"WeatherForecast"];
@@ -41,5 +45,11 @@
     return afterViewController;
 }
 
+
+-(IBAction)refreshData:(id)sender{
+    [self.city refreshData:self.numOfCityCell];
+    [self.weatherDetailViewController setCity:self.city];
+    [self.weatherDetailViewController refreshData];
+}
 
 @end

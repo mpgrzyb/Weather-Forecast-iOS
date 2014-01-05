@@ -15,4 +15,5 @@
 @property (nonatomic, strong) City *city;
 @property (nonatomic, strong) WeatherDetailsViewController *weatherDetailViewController;
 @property (nonatomic, strong) WeatherForecastViewController *weatherForecastViewController;
+@property (nonatomic) int numOfCityCell;
 @end

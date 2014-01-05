@@ -82,6 +82,7 @@
         [self.userDefaults setObject:self.cities forKey:@"cities"];
     }
     
+    cell.weatherDetailsLabel.text = city.weatherMain;
     cell.degreesLabel.text = [NSString stringWithFormat:@"%.f%@", city.temp, @"\u00B0"];
     cell.cityLabel.text = city.cityName;
     UIImage *icon = [UIImage imageNamed:[IconPicker iconForWeatherId:city.weatherId andPartOfDay:city.isDay]];
@@ -147,6 +148,7 @@
         City *city = [[City alloc] initWithData:[self.cities objectAtIndex:indexPath.row]];
         PageViewController *pageViewController = [segue destinationViewController];
         [pageViewController setCity:city];
+        [pageViewController setNumOfCityCell:indexPath.row];
     }
 }
 

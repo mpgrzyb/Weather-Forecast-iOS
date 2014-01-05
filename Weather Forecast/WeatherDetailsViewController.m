@@ -19,15 +19,21 @@
     [super viewWillAppear:animated];
     [[self.navigationController navigationBar] setTintColor:[UIColor whiteColor]];
     [self.navigationItem.backBarButtonItem setWidth:10];
+    [self.timeOflastRefreshLabel setText:[NSString stringWithFormat:@"Updated %@ ago", self.city.updateTime]];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:@"HH:mm"];
+    [self refreshData];
+}
+
+-(void) refreshData{
     [self.icon setImage:[UIImage imageNamed:[IconPicker iconForWeatherId:self.city.weatherId andPartOfDay:self.city.isDay]]];
     [self.cityNameLabel setText:self.city.cityName];
     [self.weatherDescriptionLabel setText:self.city.weatherMain];
+    [self.timeOflastRefreshLabel setText:[NSString stringWithFormat:@"Updated %@ ago", self.city.updateTime]];
     [self.temperatureLabel setText:[NSString stringWithFormat:@"%.0f%@", self.city.temp, @"\u00B0"]];
 }
 

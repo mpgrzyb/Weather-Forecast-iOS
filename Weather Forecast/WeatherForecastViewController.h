@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WeatherForecastViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITableView *forecastTableView;
 
 @end

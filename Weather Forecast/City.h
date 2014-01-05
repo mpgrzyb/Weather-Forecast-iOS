@@ -38,5 +38,8 @@
 #pragma mark - methods
 -(id) initWithData:(NSDictionary*) firstData;
 -(id) initWithId:(int) cityId andUnits:(NSString*)units;
+
 -(BOOL) isWeatherActual;
+-(void) refreshData:(int)rowNum;
+-(NSString*) updateTime;
 @end

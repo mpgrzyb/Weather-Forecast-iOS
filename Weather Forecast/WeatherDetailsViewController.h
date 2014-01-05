@@ -18,5 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *weatherDescriptionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *temperatureLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *icon;
+@property (strong, nonatomic) IBOutlet UILabel *timeOflastRefreshLabel;
 
+-(void) refreshData;
 @end

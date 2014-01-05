@@ -10,6 +10,7 @@
 		8361E35418773B61001F872A /* WeatherDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8361E35318773B61001F872A /* WeatherDetailsViewController.m */; };
 		837C45781879B3AE00F897E7 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C45771879B3AE00F897E7 /* PageViewController.m */; };
 		837C457B1879B5BE00F897E7 /* WeatherForecastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C457A1879B5BE00F897E7 /* WeatherForecastViewController.m */; };
+		837C457E1879D43200F897E7 /* WeatherForecastCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C457D1879D43200F897E7 /* WeatherForecastCell.m */; };
 		83B0E2D118743CE9007EE5FB /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B0E2D018743CE9007EE5FB /* City.m */; };
 		83B0E2D41874D165007EE5FB /* IconPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B0E2D31874D165007EE5FB /* IconPicker.m */; };
 		83DC46F2187311D200DEB6C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DC46F1187311D200DEB6C2 /* Foundation.framework */; };
@@ -47,6 +48,8 @@
 		837C45771879B3AE00F897E7 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 		837C45791879B5BE00F897E7 /* WeatherForecastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherForecastViewController.h; sourceTree = "<group>"; };
 		837C457A1879B5BE00F897E7 /* WeatherForecastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherForecastViewController.m; sourceTree = "<group>"; };
+		837C457C1879D43200F897E7 /* WeatherForecastCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherForecastCell.h; sourceTree = "<group>"; };
+		837C457D1879D43200F897E7 /* WeatherForecastCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherForecastCell.m; sourceTree = "<group>"; };
 		83B0E2CF18743CE9007EE5FB /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		83B0E2D018743CE9007EE5FB /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 		83B0E2D21874D165007EE5FB /* IconPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconPicker.h; sourceTree = "<group>"; };
@@ -133,20 +136,22 @@
 		83DC46F7187311D200DEB6C2 /* Weather Forecast */ = {
 			isa = PBXGroup;
 			children = (
-				83DC476C187360E900DEB6C2 /* Klasy */,
-				83DC4700187311D200DEB6C2 /* AppDelegate.h */,
-				83DC4701187311D200DEB6C2 /* AppDelegate.m */,
-				83DC4703187311D200DEB6C2 /* Images.xcassets */,
-				83DC46F8187311D200DEB6C2 /* Supporting Files */,
-				83DC47201873127900DEB6C2 /* Storyboard.storyboard */,
 				83DC472218731F1700DEB6C2 /* AddCityViewController.h */,
 				83DC472318731F1700DEB6C2 /* AddCityViewController.m */,
+				83DC4700187311D200DEB6C2 /* AppDelegate.h */,
+				83DC4701187311D200DEB6C2 /* AppDelegate.m */,
 				83DC47251873527400DEB6C2 /* CitiesViewController.h */,
 				83DC47261873527400DEB6C2 /* CitiesViewController.m */,
-				8361E35218773B61001F872A /* WeatherDetailsViewController.h */,
-				8361E35318773B61001F872A /* WeatherDetailsViewController.m */,
+				83DC4703187311D200DEB6C2 /* Images.xcassets */,
+				83DC476C187360E900DEB6C2 /* Klasy */,
 				837C45761879B3AE00F897E7 /* PageViewController.h */,
 				837C45771879B3AE00F897E7 /* PageViewController.m */,
+				83DC47201873127900DEB6C2 /* Storyboard.storyboard */,
+				83DC46F8187311D200DEB6C2 /* Supporting Files */,
+				8361E35218773B61001F872A /* WeatherDetailsViewController.h */,
+				8361E35318773B61001F872A /* WeatherDetailsViewController.m */,
+				837C45791879B5BE00F897E7 /* WeatherForecastViewController.h */,
+				837C457A1879B5BE00F897E7 /* WeatherForecastViewController.m */,
 			);
 			path = "Weather Forecast";
 			sourceTree = "<group>";
@@ -189,8 +194,8 @@
 				83B0E2D018743CE9007EE5FB /* City.m */,
 				83B0E2D21874D165007EE5FB /* IconPicker.h */,
 				83B0E2D31874D165007EE5FB /* IconPicker.m */,
-				837C45791879B5BE00F897E7 /* WeatherForecastViewController.h */,
-				837C457A1879B5BE00F897E7 /* WeatherForecastViewController.m */,
+				837C457C1879D43200F897E7 /* WeatherForecastCell.h */,
+				837C457D1879D43200F897E7 /* WeatherForecastCell.m */,
 			);
 			name = Klasy;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				83DC476F1873619400DEB6C2 /* CityCell.m in Sources */,
 				837C457B1879B5BE00F897E7 /* WeatherForecastViewController.m in Sources */,
 				837C45781879B3AE00F897E7 /* PageViewController.m in Sources */,
+				837C457E1879D43200F897E7 /* WeatherForecastCell.m in Sources */,
 				83B0E2D118743CE9007EE5FB /* City.m in Sources */,
 				83DC47271873527400DEB6C2 /* CitiesViewController.m in Sources */,
 				83B0E2D41874D165007EE5FB /* IconPicker.m in Sources */,

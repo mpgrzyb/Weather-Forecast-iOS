@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *cityLabel;
 @property (strong, nonatomic) IBOutlet UILabel *degreesLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *weatherIcon;
+@property (strong, nonatomic) IBOutlet UILabel *weatherDetailsLabel;
 
 @end

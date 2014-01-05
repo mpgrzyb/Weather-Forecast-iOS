@@ -7,6 +7,7 @@
 //
 
 #import "WeatherForecastViewController.h"
+#import "WeatherForecastCell.h"
 
 @interface WeatherForecastViewController ()
 
@@ -14,25 +15,51 @@
 
 @implementation WeatherForecastViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Weather details TableView
+
+- (NSInteger) tableView:(UITableView*) tableView numberOfRowsInSection:(NSInteger)section{
+    return 7;
 }
+
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    WeatherForecastCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    
+    switch (indexPath.row) {
+        case 0:
+            cell.dayOfWeek.text = @"Poniedziałek";
+            break;
+        case 1:
+            cell.dayOfWeek.text = @"Wtorek";
+            break;
+        case 2:
+            cell.dayOfWeek.text = @"Środa";
+            break;
+        case 3:
+            cell.dayOfWeek.text = @"Czwartek";
+            break;
+        case 4:
+            cell.dayOfWeek.text = @"Piątek";
+            break;
+        case 5:
+            cell.dayOfWeek.text = @"Sobota";
+            break;
+        case 6:
+            cell.dayOfWeek.text = @"Niedziela";
+            break;
+    }
+    
+    return cell;
+}
+
 
 @end
